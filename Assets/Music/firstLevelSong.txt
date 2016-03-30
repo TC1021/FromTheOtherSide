@@ -1,0 +1,54 @@
+use_random_seed 365
+i=j=0
+#----------------------------------------------------------
+phases = [[:D4, :Fs3, :B3, :Fs3],
+          [:D4, :Gs3, :B3, :Gs3],
+          [:G4, :B3, :E4, :B3],
+          [:E4, :A3, :Cs4, :A3],
+          [:D4, :Fs4, :B3, :Fs4],
+          [:D4, :Gs4, :B3, :Gs4],
+          [:G4, :B3, :E4, :B3],
+          [:E4, :A3, :Cs4, :A3],]
+define :add do |num,max,initial=0|
+  return num+=1 if num+1<max
+  return num=initial
+end
+live_loop :back, auto_cue:false do
+  sleep 2
+  loop do
+    use_synth :mod_sine
+    use_synth_defaults amp: 0.5, mod_range: 15, cutoff: 80, pulse_width: 0.2, attack: 0.03, release: 0.6,  mod_phase: 0.25, mod_invert_wave: 1
+    a=phases.choose.choose
+    play a,amp:0.075
+    sleep 0.25
+    play a+5,amp:0.075
+    sleep 0.125
+  end
+end
+live_loop :beat, auto_cue: false do
+  sleep 4
+  loop do
+    st = synth_names
+    use_synth_defaults attack: 0.05, sustain: 0.15, release: 0.125
+    s = rrand(0.19,0.30)
+    rrand_i(6,12).times do
+      sample :bd_haus, amp: factor?(look, 8) ? 3 : 2
+      synth :mod_fm,note: 35 , release: 0.0355, amp: 1.5
+      sleep s # mod_fm mod_sine mod_beep supersaw
+      synth :supersaw, note: phases[i].choose , release: 0.10, amp: 1
+      sleep s
+    end
+    i = add(i,8)
+  end
+end
+notes =  (ring :b1, :b2, :e1, :e2, :b3, :e3)
+with_synth :dsaw do
+  with_fx(:slicer, phase: [0.25,0.125].choose) do
+    with_fx(:reverb, room: 0.5, mix: 0.3) do
+      n1 = (chord notes.choose, :minor).choose
+      n2 = (chord notes.choose, :minor).choose
+      p = play n1, amp: 2, release: 8, note_slide: 4, cutoff: 30, cutoff_slide: 4, detune: rrand(0, 0.2)
+      control p, note: n2, cutoff: rrand(80, 120)
+    end
+  end
+end

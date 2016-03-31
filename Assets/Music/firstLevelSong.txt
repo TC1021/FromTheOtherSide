@@ -1,5 +1,6 @@
 use_random_seed 365
-i=j=0
+i=0
+use_bpm 60
 #----------------------------------------------------------
 phases = [[:D4, :Fs3, :B3, :Fs3],
           [:D4, :Gs3, :B3, :Gs3],
@@ -30,7 +31,7 @@ live_loop :beat, auto_cue: false do
   loop do
     st = synth_names
     use_synth_defaults attack: 0.05, sustain: 0.15, release: 0.125
-    s = rrand(0.19,0.30)
+    s = rrand(0.19,0.30) # 0.24,0.34
     rrand_i(6,12).times do
       sample :bd_haus, amp: factor?(look, 8) ? 3 : 2
       synth :mod_fm,note: 35 , release: 0.0355, amp: 1.5
@@ -41,6 +42,7 @@ live_loop :beat, auto_cue: false do
     i = add(i,8)
   end
 end
+
 notes =  (ring :b1, :b2, :e1, :e2, :b3, :e3)
 with_synth :dsaw do
   with_fx(:slicer, phase: [0.25,0.125].choose) do

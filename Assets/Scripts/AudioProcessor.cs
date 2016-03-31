@@ -51,7 +51,7 @@ public class AudioProcessor : MonoBehaviour
 	float[] spec; // the spectrum of the previous step
 	
 	/* Autocorrelation structure */
-	int maxlag = 100; // (in frames) largest lag to track
+	public int maxlag = 100; // (in frames) largest lag to track
 	float decay = 0.997f; // smoothing constant for running average
 	Autoco auco;
 	

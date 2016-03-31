@@ -10,7 +10,7 @@ using System.Collections;
 public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
 {
 	protected GameObject iOnBeat, iDefault,iError;
-	public int bt=0;
+	public float waitBeat=0.2f;
 
     void Start()
     {
@@ -26,14 +26,14 @@ public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
 	{
 		activate (iOnBeat);
 		deactivate (iDefault);
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(waitBeat);
 		deactivate (iOnBeat);
 		activate (iDefault);
 	}
 	public void onOnbeatDetected()
     {
 		Debug.Log("BEAT");
-		Debug.Log(bt);
+
 		StartCoroutine(activateBeatIndicator());
 	}
 
@@ -41,8 +41,7 @@ public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
 	public void activate(GameObject x){x.SetActive (true);}
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.UpArrow)) 
-			++bt;
+
 	}
     //This event will be called every frame while music is playing
     public void onSpectrum(float[] spectrum)

@@ -15,8 +15,7 @@ public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
     void Start()
     {
 		iDefault= GameObject.Find("beat_marker_red");
-		iOnBeat= GameObject.Find("beat_marker_green"); iOnBeat.SetActive (false);
-		iError= GameObject.Find("beat_marker");	   iError.SetActive (false);
+		iOnBeat= GameObject.Find("beat_marker_green");  iOnBeat.SetActive (false);
 		//SET AUDIOCALLBACK
         AudioProcessor processor = FindObjectOfType<AudioProcessor>();
         processor.addAudioCallback(this);

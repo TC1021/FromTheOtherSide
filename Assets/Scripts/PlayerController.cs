@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	// Movements
 	void Update () 
 	{
-		if (onBeat.activeSelf && move) //Missing to implement move logic
+		if (onBeat.activeSelf && move) //Missing to implement move logic, should ser move=false after movement
 		{
 			if (Input.GetKeyDown(KeyCode.UpArrow))
 				transform.position= transform.position+ new Vector3(0,1,0);
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		int full = life_in_half_hearts/2; //Redondea hacia abajo, por lo que esta bien
 		bool half = life_in_half_hearts%2==1; //Bandera si debemos pintar la mitad o no
+		if (full <= 0) gameOver();
 		for(int i = 0; i<hearts_array.Length;++i)
 		{
 			if(full>0)
@@ -67,6 +68,5 @@ public class PlayerController : MonoBehaviour {
 				hearts_array[i].GetComponent<SpriteRenderer>().sprite = no_heart_icon;
 			//Llenar de corazones vacios los demas
 		}
-		if (full <= 0) gameOver();
 	}
 }

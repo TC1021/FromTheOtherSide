@@ -30,16 +30,28 @@ public class PlayerController : MonoBehaviour {
 	// Movements
 	void Update () 
 	{
-		if (onBeat.activeSelf && move) //Missing to implement move logic, should ser move=false after movement
+		if (onBeat.activeSelf && move) //Missing to implement move logic, should set move=false after movement
 		{
 			if (Input.GetKeyDown(KeyCode.UpArrow))
+			{
 				transform.position= transform.position+ new Vector3(0,1,0);
-			if (Input.GetKeyDown(KeyCode.DownArrow))
+				move = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.DownArrow))
+			{
 				transform.position= transform.position+ new Vector3(0,-1,0);
-			if (Input.GetKeyDown(KeyCode.LeftArrow))
+				move = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.LeftArrow))
+			{
 				transform.position= transform.position+ new Vector3(-1,0,0);
-			if (Input.GetKeyDown(KeyCode.RightArrow))
+				move = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.RightArrow))
+			{
 				transform.position= transform.position+ new Vector3(1,0,0);
+				move = false;
+			}
 		}
 		else if (onBeat.activeSelf==false) move = true;
 	}
@@ -64,8 +76,7 @@ public class PlayerController : MonoBehaviour {
 				hearts_array[i].GetComponent<SpriteRenderer>().sprite = half_heart_icon;
 				half=false; //Ya la contamos, que no se repita
 			}
-			else
-				hearts_array[i].GetComponent<SpriteRenderer>().sprite = no_heart_icon;
+			else hearts_array[i].GetComponent<SpriteRenderer>().sprite = no_heart_icon;
 			//Llenar de corazones vacios los demas
 		}
 	}

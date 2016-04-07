@@ -32,21 +32,21 @@ public class EnemyController : MonoBehaviour {
 			//Se mueve random por ahora, implementar logica de perseguir basado en magnitud Player->Enemy
 			//Si la magnitud es menor a...5? deberia perseguirlo
 			//Debug.Log ( (transform.position-player.transform.position).magnitude );
-			switch (Random.Range(0, 4)+1) 
+			switch (Random.Range(0, 4)) 
 			{
-			case 1:
+			case 0:
 				transform.position = transform.position + new Vector3 (0, 1, 0);
 				move = false;
 				break;
-			case 2:
+			case 1:
 				transform.position = transform.position + new Vector3 (0, -1, 0);
 				move = false;
 				break;
-			case 3:
+			case 2:
 				transform.position = transform.position + new Vector3 (-1, 0, 0);
 				move = false;
 				break;
-			case 4:
+			case 3:
 				transform.position = transform.position + new Vector3 (1, 0, 0);
 				move = false;
 				break;

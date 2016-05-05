@@ -1,9 +1,15 @@
 fileFormatVersion: 2
 guid: 134aa141006674036af8700865c84a33
-timeCreated: 1460042269
+timeCreated: 1462479774
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: floor_dirt1_0
+    21300002: floor_dirt1_1
+    21300004: floor_dirt1_2
+    21300006: floor_dirt1_3
+    21300008: floor_dirt1_4
+    21300010: floor_dirt1_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +36,14 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +54,67 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: floor_dirt1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 26
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: floor_dirt1_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 26
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: floor_dirt1_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 26
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: floor_dirt1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: floor_dirt1_4
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: floor_dirt1_5
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 	// Movements
 	void Update () 
 	{
+        move = true;
 		if (onBeat.activeSelf && move) //Missing to implement move logic, should set move=false after movement
 		{
 			if (Input.GetKeyDown(KeyCode.UpArrow))

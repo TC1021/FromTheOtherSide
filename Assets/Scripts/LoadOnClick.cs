@@ -7,4 +7,9 @@ public class LoadOnClick : MonoBehaviour {
 	public void LoadScene(string level){
 		SceneManager.LoadScene(level);
 	}
+    
+    public void exitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -28,8 +28,9 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		public GameObject exit;                                         //Prefab to spawn for exit.
 		public GameObject[] floorTiles;                                 //Array of floor prefabs.
 		public GameObject[] wallTiles;                                  //Array of wall prefabs.
-		public GameObject[] enemyTiles;                                 //Array of enemy prefabs.
-		public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
+		public GameObject[] enemyTiles;                                 //Array of enemy bosses prefabs.
+    public GameObject[] enemyBossTiles;                                 //Array of enemy prefabs.
+    public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
 		
 		private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();   //A list of possible locations to place tiles.
@@ -133,16 +134,26 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
-			
 
 
-			//Determine number of enemies based on current level number, based on a logarithmic progression
-			int enemyCount = (int)Mathf.Log(level, 2f);
-			
-			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
-			
-			//Instantiate the exit tile in the upper right hand corner of our game board
-			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+
+        //Determine number of enemies based on current level number, based on a logarithmic progression
+        //int enemyCount = (int)Mathf.Log(level, 2f);
+        int enemyCount = level;
+
+        //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
+        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+
+        //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
+        switch (level)
+        {
+            case 8:
+                LayoutObjectAtRandom(enemyBossTiles, 1, 1);
+                break;
+        }
+        LayoutObjectAtRandom(enemyBossTiles, enemyCount, enemyCount);
+
+        //Instantiate the exit tile in the upper right hand corner of our game board
+        Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
 		}
 	}

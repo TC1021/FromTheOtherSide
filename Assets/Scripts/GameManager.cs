@@ -5,10 +5,13 @@ using System.Collections.Generic;       //Allows us to use Lists.
 	
 public class GameManager : MonoBehaviour
 {
+	private List<Enemy> enemies;
+	public float turnDelay = 0.1f;
+		public int life_in_half_hearts = 10;
 		
 		public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-		private int level = 3;                                  //Current level number, expressed in game as "Day 1".
+		private int level = 7;                                  //Current level number, expressed in game as "Day 1".
 		
 		//Awake is always called before any Start functions
 		void Awake()
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
 			
 			//Sets this to not be destroyed when reloading scene
 			DontDestroyOnLoad(gameObject);
-			
+			enemies = new List<Enemy> ();
 			//Get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
 			
@@ -38,16 +41,27 @@ public class GameManager : MonoBehaviour
 		//Initializes the game for each level.
 		void InitGame()
 		{
+			enemies.Clear ();
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
 			
 		}
-		
+	IEnumerator MoveEnemies()
+	{	
+		yield return new WaitForSeconds (turnDelay);
+	}
 		
 		
 		//Update is called every frame.
 		void Update()
 		{
+			//SI HAY BEAT
+			//StartCoroutine (MoveEnemies ());
 			
 		}
+	public void AddEnemyToList(Enemy e)
+	{
+		enemies.Add (e);
+	}
+	public void GameOver(){enabled=false;}
 }

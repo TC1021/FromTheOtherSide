@@ -3,12 +3,13 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 	
-	public GameObject player;
+	protected GameObject player;
 	private Vector3 offset;
 	
 	// Use this for initialization
 	void Start () 
 	{
+		player = GameObject.FindGameObjectWithTag ("Player");
 		offset = transform.position - player.transform.position;
 	}
 	

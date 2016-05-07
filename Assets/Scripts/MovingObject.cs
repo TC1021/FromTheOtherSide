@@ -40,7 +40,7 @@ using System.Collections;
 			Vector2 end = start + new Vector2 (xDir, yDir);
 			Debug.Log (start);
 			Debug.Log (end);	
-		//Disable the boxCollider so that linecast doesn't hit this object's own collider.
+			//Disable the boxCollider so that linecast doesn't hit this object's own collider.
 			boxCollider.enabled = false;
 
 			//Cast a line from start point to end point checking collision on blockingLayer.
@@ -49,17 +49,14 @@ using System.Collections;
 			//Re-enable boxCollider after linecast
 			boxCollider.enabled = true;
 			
-		    //Check if anything was hit
+			//Check if anything was hit
 			if(hit.transform == null)
 			{
-				//If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-				StartCoroutine (SmoothMovement (end));
-
-				//Return true to say that Move was successful
+				Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
+				rb2D.MovePosition (newPostion);	
 				return true;
 			}
 
-			//If something was hit, return false, Move was unsuccesful.
 			return false;
 		}
 
@@ -76,12 +73,12 @@ using System.Collections;
 			{
 				//Find a new position proportionally closer to the end, based on the moveTime
 				Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
-
 				//Call MovePosition on attached Rigidbody2D and move it to the calculated position.
 				rb2D.MovePosition (newPostion);
 
 				//Recalculate the remaining distance after moving.
 				sqrRemainingDistance = (transform.position - end).sqrMagnitude;
+
 
 				//Return and loop until sqrRemainingDistance is close enough to zero to end the function
 				yield return null;
@@ -104,7 +101,7 @@ using System.Collections;
 			if(hit.transform == null)
 				//If nothing was hit, return and don't execute further code.
 				return;
-
+			return;
 			//Get a component reference to the component of type T attached to the object that was hit
 			T hitComponent = hit.transform.GetComponent <T> ();
 

@@ -79,8 +79,8 @@ public class Player : MovingObject
 				//Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it)
 				//Pass in horizontal and vertical as parameters to specify the direction to move Player in.
 
-			transform.position += new Vector3(horizontal,vertical)  * Time.deltaTime;
-				AttemptMove<Enemy> (horizontal, vertical);
+				transform.position += new Vector3(horizontal,vertical)  * Time.deltaTime;
+				//AttemptMove<Enemy> (horizontal, vertical);
 			}
 		//else if (onBeat.activeSelf==false) move = true;
 		}
@@ -128,7 +128,7 @@ public class Player : MovingObject
 		//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
 		private void OnTriggerEnter2D (Collider2D other)
 		{
-		Debug.Log ("SI");
+		    Debug.Log ("SI");
 			//Check if the tag of the trigger collided with is Exit.
 			if(other.tag == "Finish")
 			{

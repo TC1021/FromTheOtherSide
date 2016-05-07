@@ -61,13 +61,12 @@ public class Player : MovingObject
 			int horizontal = 0;     //Used to store the horizontal move direction.
 			int vertical = 0;       //Used to store the vertical move direction.
 
-
+			
 			//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
 			horizontal = (int) (Input.GetAxisRaw ("Horizontal"));
 
 			//Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
 			vertical = (int) (Input.GetAxisRaw ("Vertical"));
-
 			//Check if moving horizontally, if so set vertical to zero.
 			if(horizontal != 0)
 			{
@@ -79,7 +78,9 @@ public class Player : MovingObject
 			{
 				//Call AttemptMove passing in the generic parameter Wall, since that is what Player may interact with if they encounter one (by attacking it)
 				//Pass in horizontal and vertical as parameters to specify the direction to move Player in.
-			AttemptMove<Enemy> (horizontal, vertical);
+
+			transform.position += new Vector3(horizontal,vertical)  * Time.deltaTime;
+				AttemptMove<Enemy> (horizontal, vertical);
 			}
 		//else if (onBeat.activeSelf==false) move = true;
 		}

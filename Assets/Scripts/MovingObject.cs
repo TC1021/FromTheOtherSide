@@ -32,13 +32,15 @@ using System.Collections;
 		//Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.
 		protected bool Move (int xDir, int yDir, out RaycastHit2D hit)
 		{
+			
 			//Store start position to move from, based on objects current transform position.
 			Vector2 start = transform.position;
 
 			// Calculate end position based on the direction parameters passed in when calling Move.
 			Vector2 end = start + new Vector2 (xDir, yDir);
-
-			//Disable the boxCollider so that linecast doesn't hit this object's own collider.
+			Debug.Log (start);
+			Debug.Log (end);	
+		//Disable the boxCollider so that linecast doesn't hit this object's own collider.
 			boxCollider.enabled = false;
 
 			//Cast a line from start point to end point checking collision on blockingLayer.
@@ -46,8 +48,8 @@ using System.Collections;
 
 			//Re-enable boxCollider after linecast
 			boxCollider.enabled = true;
-
-			//Check if anything was hit
+			
+		    //Check if anything was hit
 			if(hit.transform == null)
 			{
 				//If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
@@ -107,7 +109,7 @@ using System.Collections;
 			T hitComponent = hit.transform.GetComponent <T> ();
 
 			//If canMove is false and hitComponent is not equal to null, meaning MovingObject is blocked and has hit something it can interact with.
-			if(!canMove && hitComponent != null)
+			if(hitComponent != null)
 
 				//Call the OnCantMove function and pass it hitComponent as a parameter.
 				OnCantMove (hitComponent);

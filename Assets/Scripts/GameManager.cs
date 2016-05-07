@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour
 	private List<Enemy> enemies;
 	public float turnDelay = 0.1f;
 		public int life_in_half_hearts = 10;
-		public bool playersTurn = true;
-
+		
 		public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
 		private int level = 7;                                  //Current level number, expressed in game as "Day 1".
@@ -57,12 +56,12 @@ public class GameManager : MonoBehaviour
 		void Update()
 		{
 			//SI HAY BEAT
-			StartCoroutine (MoveEnemies ());
+			//StartCoroutine (MoveEnemies ());
 			
 		}
 	public void AddEnemyToList(Enemy e)
 	{
 		enemies.Add (e);
 	}
-		public void GameOver(){enabled=false;}
+	public void GameOver(){enabled=false;}
 }

@@ -5,12 +5,16 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 
 	public class BoardManager : MonoBehaviour
 	{
-		// Using Serializable allows us to embed a class with sub properties in the inspector.
-		[Serializable]
+    public int remainingEnemies;
+    public GameObject blockedStairs;
+    
+    // Using Serializable allows us to embed a class with sub properties in the inspector.
+    [Serializable]
 		public class Count
 		{
 			public int minimum;             //Minimum value for our Count class.
 			public int maximum;             //Maximum value for our Count class.
+            
 			
 			
 			//Assignment constructor.
@@ -83,7 +87,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 				}
 			}
 		}
-		
+
 		
 		//RandomPosition returns a random position from our list gridPositions.
 		Vector3 RandomPosition ()
@@ -126,8 +130,9 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{
-			//Creates the outer walls and floor.
-			BoardSetup ();
+
+        //Creates the outer walls and floor.
+        BoardSetup ();
 			
 			//Reset our list of gridpositions.
 			InitialiseList ();
@@ -142,18 +147,34 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
         int enemyCount = level;
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+        //LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
         switch (level)
         {
-            case 8:
+            case 3:
                 LayoutObjectAtRandom(enemyBossTiles, 1, 1);
+                remainingEnemies = 1;
+                break;
+            case 6:
+                LayoutObjectAtRandom(enemyBossTiles, 2, 2);
+                remainingEnemies = 2;
+                break;
+            case 9:
+                LayoutObjectAtRandom(enemyBossTiles, 3, 3);
+                remainingEnemies = 3;
+                break;
+            default:
+                LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+                remainingEnemies = enemyCount;
                 break;
         }
-        LayoutObjectAtRandom(enemyBossTiles, enemyCount, enemyCount);
 
         //Instantiate the exit tile in the upper right hand corner of our game board
-        Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
-		}
-	}
+        //Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+        //Instantiate(blockedStairs, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
+
+    }
+
+
+}

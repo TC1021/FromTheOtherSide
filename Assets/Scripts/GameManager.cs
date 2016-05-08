@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
 	private List<Enemy> enemies;
 	public float turnDelay = 0.1f;
-		public int life_in_half_hearts = 10;
+	public int life_in_half_hearts = 10;
 		
 		public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 		private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
@@ -41,24 +41,16 @@ public class GameManager : MonoBehaviour
 		//Initializes the game for each level.
 		void InitGame()
 		{
+			Debug.Log (level);
 			enemies.Clear ();
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
-			
 		}
 	IEnumerator MoveEnemies()
 	{	
 		yield return new WaitForSeconds (turnDelay);
 	}
 		
-		
-		//Update is called every frame.
-		void Update()
-		{
-			//SI HAY BEAT
-			//StartCoroutine (MoveEnemies ());
-			
-		}
 	public void AddEnemyToList(Enemy e)
 	{
 		enemies.Add (e);

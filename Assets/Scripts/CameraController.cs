@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		offset = transform.position - player.transform.position;
 	}
-	
+		
 	//RUNS AFTER ALL ITEM HAS BEEN PROCESSED
 	void LateUpdate () 
 	{

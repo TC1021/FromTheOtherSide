@@ -4,29 +4,28 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour {
 	protected GameObject player, OnBeat;
-	protected Text life_Indicator;
+	public Text life_Indicator;
 	protected bool move;
-	public short life = 1;
+    public short life;
 
 	// Use this for initialization
 	void Start () 
 	{
 		player = GameObject.FindGameObjectWithTag("Player") ;
-		life_Indicator = GetComponentInChildren<Text> ();
 		OnBeat = GameObject.Find ("beat_marker_green");
 		move = true;
 	}
-	void updateLife()
-	{
-		life_Indicator.text = life.ToString();
-		if (life==0)
-		{
-			Debug.Log("Muere enemigo");
-		}
-	}
+
 	void Update () 
 	{
-		if (OnBeat.activeSelf && move) 
+        life_Indicator.text = "" + life;
+        if (life == 0)
+        {
+            Debug.Log("Muere enemigo");
+            Destroy(gameObject);
+        }
+
+        if (OnBeat.activeSelf && move) 
 		{
 			//Move false es para que no se mueva 5 veces en el mismo beat
 			//Se mueve random por ahora, implementar logica de perseguir basado en magnitud Player->Enemy

@@ -51,21 +51,24 @@ public class Player : MovingObject
 		{
 			int horizontal = 0;     //Used to store the horizontal move direction.
 			int vertical = 0;       //Used to store the vertical move direction.
-			//Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
-			horizontal = (int) (Input.GetAxisRaw ("Horizontal"));
-			//Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
-			vertical = (int) (Input.GetAxisRaw ("Vertical"));
-			//Check if moving horizontally, if so set vertical to zero.
+					
+			if (Input.GetKeyDown (KeyCode.RightArrow)) 
+			{horizontal = 1;} 
+			else if (Input.GetKeyDown (KeyCode.LeftArrow)) 
+			{horizontal = -1;} 
+			else if (Input.GetKeyDown (KeyCode.DownArrow)) 
+			{vertical = -1;} 
+			else if (Input.GetKeyDown (KeyCode.UpArrow)) 
+			{vertical = 1;}
+
 			vertical = horizontal!=0? 0 : vertical;
-			
 			if(horizontal != 0 || vertical != 0)
 			{
 				RaycastHit2D hit;
 				if (Move (horizontal, vertical, out hit))
 					return; 
-				//SI NOS DEJO MOVER HACER NADA
-				//SI NO PUDIMOS EVALUAR CONTRA QUE CHOCAMOS
-				if (hit.transform.tag == "enemy") 
+			
+				if (hit.transform.tag == "enemy")  //ATACAR
 				{
 					animator.SetTrigger ("solarisChop");
 					//animator.SetTrigger ("solarisHit");

@@ -38,15 +38,20 @@ using System.Collections;
 			Vector2 end = start + new Vector2 (xDir, yDir);
 			//Disable the boxCollider so that linecast doesn't hit this object's own collider.
 			boxCollider.enabled = false;
+
 			//Cast a line from start point to end point checking collision on blockingLayer.
 			hit = Physics2D.Linecast (start, end, blockingLayer);
+	
 			//Re-enable boxCollider after linecast
 			boxCollider.enabled = true;
 			//Check if anything was hit
 			if(hit.transform == null)
 			{
-				Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
-				rb2D.MovePosition (newPostion);	
+				//Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
+				//rb2D.MovePosition (newPostion);
+			Debug.Log ("X:"+xDir.ToString()); 
+			Debug.Log ("Y :" + yDir.ToString());
+				transform.Translate (xDir,yDir,0.0f);
 				return true;	
 			}
 		return false;//hit.rigidbody;

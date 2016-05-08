@@ -64,10 +64,15 @@ public class Player : MovingObject
 			if(horizontal != 0 || vertical != 0)
 			{
 				RaycastHit2D hit;
-			if (Move (horizontal, vertical, out hit))
-				return;
-			
-			Debug.Log (hit.transform.tag);
+				if (Move (horizontal, vertical, out hit))
+					return; //SI NOS DEJO MOVER HACER NADA
+				//SI NO PUDIMOS EVALUAR CONTRA QUE CHOCAMOS
+				if (hit.transform.tag == "enemy") 
+				{
+					animator.SetTrigger ("solarisChop");
+					//animator.SetTrigger ("solarisHit");
+				}
+				//Debug.Log (hit.transform.tag);
 
 				//transform.position += new Vector3(horizontal,vertical)*Time.deltaTime;
 			}

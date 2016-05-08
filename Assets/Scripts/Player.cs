@@ -56,25 +56,20 @@ public class Player : MovingObject
 			//Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
 			vertical = (int) (Input.GetAxisRaw ("Vertical"));
 			//Check if moving horizontally, if so set vertical to zero.
-			if(horizontal != 0)
-			{
-				vertical = 0;
-			}
+			vertical = horizontal!=0? 0 : vertical;
 			
 			if(horizontal != 0 || vertical != 0)
 			{
 				RaycastHit2D hit;
 				if (Move (horizontal, vertical, out hit))
-					return; //SI NOS DEJO MOVER HACER NADA
+					return; 
+				//SI NOS DEJO MOVER HACER NADA
 				//SI NO PUDIMOS EVALUAR CONTRA QUE CHOCAMOS
 				if (hit.transform.tag == "enemy") 
 				{
 					animator.SetTrigger ("solarisChop");
 					//animator.SetTrigger ("solarisHit");
 				}
-				//Debug.Log (hit.transform.tag);
-
-				//transform.position += new Vector3(horizontal,vertical)*Time.deltaTime;
 			}
 		}
 

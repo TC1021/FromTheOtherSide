@@ -64,7 +64,11 @@ public class Player : MovingObject
 			if(horizontal != 0 || vertical != 0)
 			{
 				RaycastHit2D hit;
-				Move (horizontal, vertical, out hit);
+			if (Move (horizontal, vertical, out hit))
+				return;
+			
+			Debug.Log (hit.transform.tag);
+
 				//transform.position += new Vector3(horizontal,vertical)*Time.deltaTime;
 			}
 		}
@@ -85,6 +89,11 @@ public class Player : MovingObject
 
 				//Disable the player object since level is over.
 				enabled = false;
+			}
+			else if (other.tag == "enemy") 
+			{
+				Debug.Log ("ENEMY");
+				animator.SetTrigger ("solarisHit");
 			}
 			
 		}

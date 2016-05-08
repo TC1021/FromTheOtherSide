@@ -30,34 +30,26 @@ using System.Collections;
 
 		//Move returns true if it is able to move and false if not. 
 		//Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.
-		protected bool Move (int xDir, int yDir, out RaycastHit2D hit)
+	protected bool Move (int xDir, int yDir, out RaycastHit2D hit)
 		{
-			
 			//Store start position to move from, based on objects current transform position.
 			Vector2 start = transform.position;
-
 			// Calculate end position based on the direction parameters passed in when calling Move.
 			Vector2 end = start + new Vector2 (xDir, yDir);
-			Debug.Log (start);
-			Debug.Log (end);	
 			//Disable the boxCollider so that linecast doesn't hit this object's own collider.
 			boxCollider.enabled = false;
-
 			//Cast a line from start point to end point checking collision on blockingLayer.
 			hit = Physics2D.Linecast (start, end, blockingLayer);
-
 			//Re-enable boxCollider after linecast
 			boxCollider.enabled = true;
-			
 			//Check if anything was hit
 			if(hit.transform == null)
 			{
 				Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
 				rb2D.MovePosition (newPostion);	
-				return true;
+				return true;	
 			}
-
-			return false;
+		return false;//hit.rigidbody;
 		}
 
 

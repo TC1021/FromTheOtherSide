@@ -19,6 +19,7 @@ public class EnemyController : MovingObject {
 		shadow = false;
 		checkLife ();
 		animate ();
+		base.Start ();
 	}
 	void enemyDies()
 	{

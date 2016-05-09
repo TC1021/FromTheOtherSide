@@ -139,7 +139,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
 		//int enemyCount = level;
-		int enemyCount = (int)Mathf.Log(level, 2f);
+		int enemyCount = 1;//(int)Mathf.Log(level, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);

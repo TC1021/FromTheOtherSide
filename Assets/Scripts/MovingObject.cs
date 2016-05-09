@@ -37,7 +37,8 @@ using System.Collections;
 			// Calculate end position based on the direction parameters passed in when calling Move.
 			Vector2 end = start + new Vector2 (xDir, yDir);
 			//Disable the boxCollider so that linecast doesn't hit this object's own collider.
-			boxCollider.enabled = false;
+			
+		boxCollider.enabled = false;
 
 			//Cast a line from start point to end point checking collision on blockingLayer.
 			hit = Physics2D.Linecast (start, end, blockingLayer);
@@ -47,8 +48,6 @@ using System.Collections;
 			//Check if anything was hit
 			if(hit.transform == null)
 			{
-				//Vector3 newPostion = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
-				//rb2D.MovePosition (newPostion);
 				transform.Translate (xDir,yDir,0.0f);
 				return true;	
 			}

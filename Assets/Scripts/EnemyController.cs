@@ -92,12 +92,11 @@ public class EnemyController : MovingObject {
 
 
 		RaycastHit2D hit;
-		if (true)//Move (xDir, yDir, out hit))
+		if (Move (xDir, yDir, out hit))
 			return; 
 		if (hit.transform.tag == "player")  //ATACAR
 		{
 			animator.SetTrigger ("attack");
-			//animator.SetTrigger ("solarisHit");
 		}
 
 	}

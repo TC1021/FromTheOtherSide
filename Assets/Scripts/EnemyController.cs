@@ -7,6 +7,7 @@ public class EnemyController : MovingObject {
 	public Text life_Indicator;
 	public short life;
 	public int playerDamage;                            //The amount of food points to subtract from the player when attacking.
+	public short skips;
 	private Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
 	private Transform target;                           //Transform to attempt to move toward each turn.
 	private bool shadow;
@@ -44,60 +45,40 @@ public class EnemyController : MovingObject {
 	{
 		shadow = (target.position-transform.position).magnitude < 4; //Si es mas de 5 que se vean sombra y no persigan
 		animate ();
-
-        
-		/*
-        if (OnBeat.activeSelf && move) 
-		{
-			//Move false es para que no se mueva 5 veces en el mismo beat
-			//Se mueve random por ahora, implementar logica de perseguir basado en magnitud Player->Enemy
-			//Si la magnitud es menor a...5? deberia perseguirlo
-			//Debug.Log ( (transform.position-player.transform.position).magnitude );
-			switch (Random.Range(0, 4)) 
-			{
-			case 0:
-				transform.position = transform.position + new Vector3 (0, 1, 0);
-				move = false;
-				break;
-			case 1:
-				transform.position = transform.position + new Vector3 (0, -1, 0);
-				move = false;
-				break;
-			case 2:
-				transform.position = transform.position + new Vector3 (-1, 0, 0);
-				move = false;
-				break;
-			case 3:
-				transform.position = transform.position + new Vector3 (1, 0, 0);
-				move = false;
-				break;
-			}
-		}
-		else if (OnBeat.activeSelf==false) move = true;
-		*/
 	}
 	public void MoveEnemy ()
 	{
-		//Declare variables for X and Y axis move directions, these range from -1 to 1.
-		//These values allow us to choose between the cardinal directions: up, down, left and right.
-		int xDir = 0;
-		int yDir = 0;
-
-		//If the difference in positions is approximately zero (Epsilon) do the following:
-		//if(Mathf.Abs (target.position.x - transform.position.x) < float.Epsilon)
-
-		if(target.position.x - transform.position.x>1)
-			yDir = target.position.y > transform.position.y ? 1 : -1;
-		else
-			xDir = target.position.x > transform.position.x ? 1 : -1;
-
-
+		if (Random.Range (0,skips) != 0) 
+			return; //1 de cada skips[Si es 4 movera 25% de los beats]
+			
+		int xDir = 0; int yDir = 0;
 		RaycastHit2D hit;
-		if (Move (xDir, yDir, out hit))
-			return; 
-		if (hit.transform.tag == "player")  //ATACAR
+
+		if (shadow) 
+		{ return;
+			//SI shadow, perseguir
+			//yDir = target.position.y > transform.position.y ? 1 : -1;
+			//xDir = target.position.x > transform.position.x ? 1 : -1;
+			if (Move (xDir, yDir, out hit))
+				return; 
+			if (hit.transform.tag == "player")
+			{  //ATACAR
+				animator.SetTrigger ("attack");
+			}
+		} else //AQUI SE DEBE MOVER RANDOM
 		{
-			animator.SetTrigger ("attack");
+			switch (Random.Range (0, 2)) //Aleatorio de Aleatorios
+			{
+			case 0: //Mover X
+				xDir = Random.Range (-1, 2);
+				//yDir = xDir != 0 ? 0 : Random.Range (-1, 2); //Estos son en caso de 0
+				break;
+			case 1://Mover Y
+				yDir = Random.Range (-1, 2);
+				//xDir = yDir != 0 ? 0 : Random.Range (-1, 2); 
+				break;
+			}
+			Move (xDir, yDir, out hit);
 		}
 
 	}

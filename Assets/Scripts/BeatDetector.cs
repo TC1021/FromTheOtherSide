@@ -26,13 +26,12 @@ public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
 		activate (iOnBeat);
 		deactivate (iDefault);
 		yield return new WaitForSeconds(waitBeat);
-		//deactivate (iOnBeat);
-		//activate (iDefault);
+		deactivate (iOnBeat);
+		activate (iDefault);
 	}
 	public void onOnbeatDetected()
     {
 		Debug.Log("BEAT");
-
 		StartCoroutine(activateBeatIndicator());
 	}
 

@@ -5,7 +5,8 @@ using System.Collections.Generic;       //Allows us to use Lists.
 	
 public class GameManager : MonoBehaviour
 {
-	private List<Enemy> enemies;
+	private List<EnemyController> enemies;
+
 	public float turnDelay = 0.1f;
 	public int life_in_half_hearts = 10;
 		
@@ -30,18 +31,23 @@ public class GameManager : MonoBehaviour
 			
 			//Sets this to not be destroyed when reloading scene
 			DontDestroyOnLoad(gameObject);
-			enemies = new List<Enemy> ();
+			
+			enemies = new List<EnemyController> ();
 			//Get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
 			
 			//Call the InitGame function to initialize the first level 
 			InitGame();
 		}
-		
+	void OnLevelWasLoaded(int index)
+	{
+		level++;
+		InitGame ();
+	}
 		//Initializes the game for each level.
 		void InitGame()
 		{
-			++level;
+			//++level;
 			enemies.Clear ();
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
@@ -49,11 +55,24 @@ public class GameManager : MonoBehaviour
 	IEnumerator MoveEnemies()
 	{	
 		yield return new WaitForSeconds (turnDelay);
+		if (enemies.Count == 0) 
+		{
+			//Desbloquear la salida?
+		}
+		for (int i = 0; i < enemies.Count; ++i) 
+		{
+			enemies [i].MoveEnemy(); //Mover hacia el enemigo
+		}
 	}
 		
-	public void AddEnemyToList(Enemy e)
+	public void AddEnemyToList(EnemyController e)
+	{ enemies.Add (e); }
+	public void RemoveEnemyFromList(EnemyController e)
+	{ enemies.Remove (e);}
+	void Update()
 	{
-		enemies.Add (e);
+		//Checar el beat, si hay...
+		StartCoroutine (MoveEnemies ());
 	}
 	public void GameOver(){enabled=false;}
 }

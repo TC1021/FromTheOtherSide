@@ -76,9 +76,6 @@ public class Player : MovingObject
 			}
 		}
 
-		
-		protected override void AttemptMove <T> (int xDir, int yDir){}
-		protected override void OnCantMove <T> (T component){}
 
 		//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
 		private void OnTriggerEnter2D (Collider2D other)

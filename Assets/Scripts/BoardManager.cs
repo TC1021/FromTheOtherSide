@@ -138,20 +138,15 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
-        //int enemyCount = (int)Mathf.Log(level, 2f);
-        int enemyCount = level;
+		//int enemyCount = level;
+		int enemyCount = (int)Mathf.Log(level, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
         LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-        switch (level)
-        {
-            case 8:
-                LayoutObjectAtRandom(enemyBossTiles, 1, 1);
-                break;
-        }
-        LayoutObjectAtRandom(enemyBossTiles, enemyCount, enemyCount);
+		if (level==3)
+			LayoutObjectAtRandom(enemyBossTiles, 1, 1);
 
         //Instantiate the exit tile in the upper right hand corner of our game board
         Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);

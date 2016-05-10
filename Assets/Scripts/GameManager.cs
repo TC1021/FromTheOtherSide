@@ -10,9 +10,10 @@ public class GameManager : MonoBehaviour
 	public float turnDelay = 0.1f;
 	public int life_in_half_hearts = 10;
 	private GameObject onBeat;
-		public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-		private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-		private int level = 1;                                  //Current level number, expressed in game as "Day 1".
+	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
+	private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
+	private int level = 1;   
+	bool movement; //Current level number, expressed in game as "Day 1".
 		
 		//Awake is always called before any Start functions
 		void Awake()
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 			
 			enemies = new List<EnemyController> ();
 			//Get a component reference to the attached BoardManager script
+			movement = true;
 			boardScript = GetComponent<BoardManager>();
 			//Call the InitGame function to initialize the first level 
 			InitGame();
@@ -71,10 +73,15 @@ public class GameManager : MonoBehaviour
 	{ enemies.Remove (e);}
 	void Update()
 	{
-		if (onBeat.activeSelf) 
+		if (onBeat.activeSelf && movement) 
 		{
 			StartCoroutine (MoveEnemies ());
+			movement = false;
 		}
+
+		if (!onBeat.activeSelf)
+			movement = true; //Bandera para que no se muevan mas de 1 vez por beat
+			
 	}
 	public void GameOver(){enabled=false;}
 }

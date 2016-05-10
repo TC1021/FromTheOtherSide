@@ -16,7 +16,7 @@ public class EnemyController : MovingObject {
 	{
 		GameManager.instance.AddEnemyToList (this);
 		animator = GetComponent<Animator> ();
-		target = GameObject.FindGameObjectWithTag ("Player").transform;
+		target = GameObject.FindGameObjectWithTag ("Player");
 		shadow = false;
 		checkLife ();
 		animate ();
@@ -43,7 +43,7 @@ public class EnemyController : MovingObject {
 	}
 	void Update () 
 	{
-		shadow = (target.position-transform.position).magnitude < 4; //Si es mas de 5 que se vean sombra y no persigan
+		shadow = (target.transform.position-transform.position).magnitude < 4; //Si es mas de 5 que se vean sombra y no persigan
 		animate ();
 	}
 	public void MoveEnemy ()
@@ -55,15 +55,31 @@ public class EnemyController : MovingObject {
 		RaycastHit2D hit;
 
 		if (shadow) 
-		{ return;
-			//SI shadow, perseguir
-			//yDir = target.position.y > transform.position.y ? 1 : -1;
-			//xDir = target.position.x > transform.position.x ? 1 : -1;
-			if (Move (xDir, yDir, out hit))
-				return; 
-			if (hit.transform.tag == "player")
-			{  //ATACAR
-				animator.SetTrigger ("attack");
+		{ 
+			//SI shadow, perseguir, Dir es la resta de posiciones
+			xDir = (int)(Mathf.Round(target.transform.position.x)-transform.position.x);
+			yDir = (int)(Mathf.Round(target.transform.position.y)-transform.position.y);
+
+			if (Mathf.Abs (xDir + yDir) == 1) 
+			{
+				Debug.Log ("ATACANDO");
+				target.GetComponent<Player>();
+				return;
+			}
+
+			bool first_x = Random.Range (0, 2) == 0; //MOVER PRIMERO EN ALEATORIO X,Y
+			if (first_x && xDir != 0)//SI ES DIFERENTE DE 0 Mover AQUI
+				xDir = xDir > 0 ? 1 : -1;
+			else //De otro modo mover en eje Y
+			{
+				if (yDir > 0) yDir = 1;
+				else if (yDir < 0) yDir = -1;
+			}
+			yDir = xDir!=0? 0 : yDir; //Con esto evitamos diagonal
+			if(xDir != 0 || yDir != 0) //SI DEBE MOVERSE
+			{
+				if (Move (xDir, yDir, out hit))
+					return; 
 			}
 		} else //AQUI SE DEBE MOVER RANDOM
 		{
@@ -71,11 +87,9 @@ public class EnemyController : MovingObject {
 			{
 			case 0: //Mover X
 				xDir = Random.Range (-1, 2);
-				//yDir = xDir != 0 ? 0 : Random.Range (-1, 2); //Estos son en caso de 0
 				break;
 			case 1://Mover Y
 				yDir = Random.Range (-1, 2);
-				//xDir = yDir != 0 ? 0 : Random.Range (-1, 2); 
 				break;
 			}
 			Move (xDir, yDir, out hit);

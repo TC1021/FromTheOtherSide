@@ -110,7 +110,7 @@ public class Player : MovingObject
 	{
 		int full = life_in_half_hearts/2; //Redondea hacia abajo, por lo que esta bien
 		bool half = life_in_half_hearts%2==1; //Bandera si debemos pintar la mitad o no
-		if (full <= 0) gameOver();
+		if (full <= 0 && half==false) gameOver(); //Caso de medio corazon
 		for(int i = 0; i<hearts_array.Length;++i)
 		{
 			if(full>0)
@@ -131,5 +131,10 @@ public class Player : MovingObject
 	{
 		Debug.Log("GAME OVER"); //HACER ALGO
 		GameManager.instance.GameOver ();
+	}
+	public void looseHealth(short damage)
+	{
+		life_in_half_hearts -= damage;
+		updateLifeBar ();
 	}
 }

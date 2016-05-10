@@ -26,6 +26,8 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		public int rows = 8;                                            //Number of rows in our game board.
 		//public Count wallCount = new Count (5, 9);                      //Lower and upper limit for our random number of walls per level.
 		public GameObject exit;                                         //Prefab to spawn for exit.
+		public GameObject locked_exit;                                  //Prefab to spawn for locked_exit.
+
 		public GameObject[] floorTiles;                                 //Array of floor prefabs.
 		//public GameObject[] wallTiles;                                  //Array of wall prefabs.
 		public GameObject[] enemyTiles;                                 //Array of enemy bosses prefabs.
@@ -122,7 +124,10 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			}
 		}
 		
-		
+		public void unLockExit()
+		{
+			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+		}
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{
@@ -149,6 +154,6 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			LayoutObjectAtRandom(enemyBossTiles, 1, 1);
 
         //Instantiate the exit tile in the upper right hand corner of our game board
-        Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+		Instantiate (locked_exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
 		}
 	}

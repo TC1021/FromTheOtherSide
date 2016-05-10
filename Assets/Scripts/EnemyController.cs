@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class EnemyController : MovingObject {
 
 	public Text life_Indicator;
-	public short life;
+	public int life;
 	public int playerDamage;                            //The amount of food points to subtract from the player when attacking.
 	public short skips;
 	private Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
@@ -24,7 +24,6 @@ public class EnemyController : MovingObject {
 	}
 	void enemyDies()
 	{
-		Debug.Log("Muere enemigo");
 		Destroy(gameObject);
 		GameManager.instance.RemoveEnemyFromList(this);
 	}
@@ -46,6 +45,11 @@ public class EnemyController : MovingObject {
 		shadow = (target.transform.position-transform.position).magnitude < 4; //Si es mas de 5 que se vean sombra y no persigan
 		animate ();
 	}
+	public void looseHealth(int damage)
+	{
+		life -= damage;
+		checkLife();
+	}
 	public void MoveEnemy ()
 	{
 		if (Random.Range (0,skips) != 0) 
@@ -62,8 +66,7 @@ public class EnemyController : MovingObject {
 
 			if (Mathf.Abs (xDir + yDir) == 1) 
 			{
-				Debug.Log ("ATACANDO");
-				target.GetComponent<Player>();
+				target.GetComponent<Player>().looseHealth(playerDamage);
 				return;
 			}
 

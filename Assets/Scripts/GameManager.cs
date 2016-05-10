@@ -57,10 +57,6 @@ public class GameManager : MonoBehaviour
 	IEnumerator MoveEnemies()
 	{	
 		yield return new WaitForSeconds (turnDelay);
-		if (enemies.Count == 0) 
-		{
-			//Desbloquear la salida?
-		}
 		for (int i = 0; i < enemies.Count; ++i) 
 		{
 			enemies [i].MoveEnemy(); //Mover hacia el enemigo
@@ -70,7 +66,11 @@ public class GameManager : MonoBehaviour
 	public void AddEnemyToList(EnemyController e)
 	{ enemies.Add (e); }
 	public void RemoveEnemyFromList(EnemyController e)
-	{ enemies.Remove (e);}
+	{ 
+		enemies.Remove (e);
+		if (enemies.Count == 0)
+			boardScript.unLockExit ();
+	}
 	void Update()
 	{
 		if (onBeat.activeSelf && movement) 

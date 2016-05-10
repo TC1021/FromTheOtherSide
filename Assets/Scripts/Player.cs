@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MovingObject
 	{
-		public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
+		protected float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
 		public int damage = 1;                  //How much damage a player does to a wall when chopping it.
 
 
@@ -70,8 +70,8 @@ public class Player : MovingObject
 			
 				if (hit.transform.tag == "enemy")  //ATACAR
 				{
-					animator.SetTrigger ("solarisChop");
-					//animator.SetTrigger ("solarisHit");
+					animator.SetTrigger ("solarisChop");	
+					hit.rigidbody.GetComponent<EnemyController> ().looseHealth(damage);
 				}
 			}
 		}
@@ -89,13 +89,7 @@ public class Player : MovingObject
 
 				//Disable the player object since level is over.
 				enabled = false;
-			}
-			else if (other.tag == "enemy") 
-			{
-				Debug.Log ("ENEMY");
-				animator.SetTrigger ("solarisHit");
-			}
-			
+			}			
 		}
 
 
@@ -106,7 +100,7 @@ public class Player : MovingObject
 		Application.LoadLevel (Application.loadedLevel);
 	}
 		
-	public void updateLifeBar()
+	protected void updateLifeBar()
 	{
 		int full = life_in_half_hearts/2; //Redondea hacia abajo, por lo que esta bien
 		bool half = life_in_half_hearts%2==1; //Bandera si debemos pintar la mitad o no
@@ -127,13 +121,15 @@ public class Player : MovingObject
 			//Llenar de corazones vacios los demas
 		}
 	}
-	public void gameOver()
+	private void gameOver()
 	{
-		Debug.Log("GAME OVER"); //HACER ALGO
+		//Destroy(gameObject);
+		enabled=false;
 		GameManager.instance.GameOver ();
 	}
-	public void looseHealth(short damage)
+	public void looseHealth(int damage)
 	{
+		animator.SetTrigger ("solarisHit");
 		life_in_half_hearts -= damage;
 		updateLifeBar ();
 	}

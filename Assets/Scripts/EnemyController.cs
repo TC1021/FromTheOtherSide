@@ -9,7 +9,7 @@ public class EnemyController : MovingObject {
 	public int playerDamage;                            //The amount of food points to subtract from the player when attacking.
 	public short skips;
 	private Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
-	private Transform target;                           //Transform to attempt to move toward each turn.
+	private GameObject target;                           //Transform to attempt to move toward each turn.
 	private bool shadow;
 	// Use this for initialization
 	void Start () 

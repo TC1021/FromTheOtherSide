@@ -66,6 +66,7 @@ public class EnemyController : MovingObject {
 
 			if (Mathf.Abs (xDir + yDir) == 1) 
 			{
+				animator.SetTrigger("attack");
 				target.GetComponent<Player>().looseHealth(playerDamage);
 				return;
 			}

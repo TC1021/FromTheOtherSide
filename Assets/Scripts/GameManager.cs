@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 		//Initializes the game for each level.
 		void InitGame()
 		{
-			resetBoard ();
+			GameManager.instance.resetBoard ();
 			//++level;
 			onBeat = GameObject.Find ("beat_marker_green");
 			enemies.Clear ();

@@ -62,6 +62,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		{
 			//Instantiate Board and set boardHolder to its transform.
 			boardHolder = new GameObject ("Board").transform;
+			boardHolder.tag="board";
 			
 			//Loop along x axis, starting from -1 (to fill corner) with floor or outerwall edge tiles.
 			for(int x = -1; x < columns + 1; x++)

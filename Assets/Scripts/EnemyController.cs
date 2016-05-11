@@ -8,9 +8,9 @@ public class EnemyController : MovingObject {
 	public int life;
 	public int playerDamage;                            //The amount of food points to subtract from the player when attacking.
 	public short skips;
-	private Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
-	private GameObject target;                           //Transform to attempt to move toward each turn.
-	private bool shadow;
+	protected Animator animator;                          //Variable of type Animator to store a reference to the enemy's Animator component.
+	protected GameObject target;                           //Transform to attempt to move toward each turn.
+	protected bool shadow;
 	// Use this for initialization
 	void Start () 
 	{
@@ -50,7 +50,7 @@ public class EnemyController : MovingObject {
 		life -= damage;
 		checkLife();
 	}
-	public bool tryToattack(int xDir,int yDir)
+	protected virtual bool tryToattack(int xDir,int yDir)
 	{
 		if (Mathf.Abs (xDir + yDir) <= 1) 
 		{

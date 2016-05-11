@@ -9,9 +9,9 @@ using System.Collections;
 		public LayerMask blockingLayer;         //Layer on which collision will be checked.
 
 
-		private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
-		private Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
-		private float inverseMoveTime;          //Used to make movement more efficient.
+	protected BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
+	protected Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
+	protected float inverseMoveTime;          //Used to make movement more efficient.
 
 
 		//Protected, virtual functions can be overridden by inheriting classes.

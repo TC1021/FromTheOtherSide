@@ -63,7 +63,7 @@ public class EnemyController : MovingObject {
 			//SI shadow, perseguir, Dir es la resta de posiciones
 			xDir = (int)(Mathf.Round(target.transform.position.x)-transform.position.x);
 			yDir = (int)(Mathf.Round(target.transform.position.y)-transform.position.y);
-
+			Debug.Log (xDir + yDir);
 			if (Mathf.Abs (xDir + yDir) == 1) 
 			{
 				animator.SetTrigger("attack");

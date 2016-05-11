@@ -123,11 +123,17 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 				Instantiate(tileChoice, randomPosition, Quaternion.identity);
 			}
 		}
-		
+	/*public void clear()
+	{
+		Destroy (GameObject.Find ("Board"));
+		Destroy (GameObject.Find ("exit locked(Clone)"));
+		Destroy (GameObject.Find ("exit(Clone)"));
+	}*/
 		public void unLockExit()
 		{
 			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
 		}
+
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
 		public void SetupScene (int level)
 		{

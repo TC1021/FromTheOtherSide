@@ -38,7 +38,7 @@ using System.Collections;
 			Vector2 end = start + new Vector2 (xDir, yDir);
 			//Disable the boxCollider so that linecast doesn't hit this object's own collider.
 			
-		boxCollider.enabled = false;
+			boxCollider.enabled = false;
 
 			//Cast a line from start point to end point checking collision on blockingLayer.
 			hit = Physics2D.Linecast (start, end, blockingLayer);

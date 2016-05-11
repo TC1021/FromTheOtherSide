@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	private GameObject onBeat;
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-	public int level = 3;
+	public int level = 1;
     bool movement; //Current level number, expressed in game as "Day 1".
 		
 		//Awake is always called before any Start functions
@@ -42,17 +42,17 @@ public class GameManager : MonoBehaviour
 		}
 	void OnLevelWasLoaded(int index)
 	{
+		Debug.Log ("LEVEL LOADED");
         level++;
         InitGame ();
 	}
 		//Initializes the game for each level.
 		void InitGame()
 		{
-			//GameManager.instance.resetBoard ();
-			//++level;
+			GameManager.instance.resetBoard ();
 			onBeat = GameObject.Find ("beat_marker_green");
 			enemies.Clear ();
-			//Call the SetupScene function of the BoardManager script, pass it current level number.
+			
 			boardScript.SetupScene(level);
 		}
 	public void resetBoard()

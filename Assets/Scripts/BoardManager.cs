@@ -166,7 +166,21 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
         LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-		if (level==3)
+		if (level%3==0)  //PONDREMOS BOSS
+		{
+			switch (level / 3) 
+			{
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				default:
+					break;
+			}
+		}
+			
 			LayoutObjectAtRandom(enemyBossTiles, 1, 1);
 
         //Instantiate the exit tile in the upper right hand corner of our game board

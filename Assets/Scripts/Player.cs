@@ -96,7 +96,7 @@ public class Player : MovingObject
 		//Restart reloads the scene when called.
 	private void Restart ()
 	{
-		//GameManager.instance.resetBoard ();
+		GameManager.instance.resetBoard ();
 		//Load the last scene loaded, in this case Main, the only scene in the game.
 		Application.LoadLevel (Application.loadedLevel);
 	}

@@ -127,12 +127,12 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 				Instantiate(tileChoice, randomPosition, Quaternion.identity);
 			}
 		}
-	/*public void clear()
+	public void clear()
 	{
 		Destroy (GameObject.Find ("Board"));
 		Destroy (GameObject.Find ("exit locked(Clone)"));
 		Destroy (GameObject.Find ("exit(Clone)"));
-	}*/
+	}
 		public void unLockExit()
 		{
 			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);

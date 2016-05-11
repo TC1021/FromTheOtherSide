@@ -48,14 +48,15 @@ public class GameManager : MonoBehaviour
 		//Initializes the game for each level.
 		void InitGame()
 		{
+			resetBoard ();
 			//++level;
 			onBeat = GameObject.Find ("beat_marker_green");
 			enemies.Clear ();
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
 		}
-	//public void resetBoard()
-	//{boardScript.clear ();}
+	public void resetBoard()
+	{boardScript.clear ();}
 	IEnumerator MoveEnemies()
 	{	
 		yield return new WaitForSeconds (turnDelay);

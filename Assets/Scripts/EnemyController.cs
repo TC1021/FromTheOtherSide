@@ -22,18 +22,18 @@ public class EnemyController : MovingObject {
 		animate ();
 		base.Start ();
 	}
-	void enemyDies()
+	protected void enemyDies()
 	{
 		Destroy(gameObject);
 		GameManager.instance.RemoveEnemyFromList(this);
 	}
-	void checkLife()
+	protected void checkLife()
 	{
 		life_Indicator.text = "" + life;
 		if (life == 0)
 		{ enemyDies(); }
 	}
-	void animate()
+	protected void animate()
 	{
 		if (shadow) 
 			animator.SetTrigger("color");

@@ -20,4 +20,9 @@ public class dragonController : EnemyController
 		}
 		return false;
 	}
+	void Update () 
+	{
+		shadow = (target.transform.position-transform.position).magnitude < 4; //Si es mas de 5 que se vean sombra y no persigan
+		animate ();
+	}
 }

@@ -73,7 +73,7 @@ public class EnemyController : MovingObject {
 			//SI shadow, perseguir, Dir es la resta de posiciones
 			xDir = (int)(Mathf.Round(target.transform.position.x)-transform.position.x);
 			yDir = (int)(Mathf.Round(target.transform.position.y)-transform.position.y);
-			Debug.Log (xDir + yDir);
+			//Debug.Log (xDir + yDir);
 
 			if (tryToattack(xDir,yDir)) //SI ATACA QUE SE REGRESE
 				return;

@@ -74,7 +74,11 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 					
 					//Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
 					if(x == -1 || x == columns || y == -1 || y == rows)
-						toInstantiate = outerWallTiles [Random.Range (0, outerWallTiles.Length)];
+						toInstantiate = outerWallTiles [Random.Range (1, outerWallTiles.Length)];
+
+					if (y == 10)
+						toInstantiate = outerWallTiles [0];
+				
 					
 					//Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
 					GameObject instance =

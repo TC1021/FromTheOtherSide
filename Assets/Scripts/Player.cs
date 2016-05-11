@@ -97,8 +97,8 @@ public class Player : MovingObject
 	private void Restart ()
 	{
 		//GameManager.instance.resetBoard ();
-		//Load the last scene loaded, in this case Main, the only scene in the game.
-		Application.LoadLevel (Application.loadedLevel);
+		//Application.LoadLevel("mainScene");
+		Application.LoadLevel(Application.loadedLevel);
 	}
 		
 	protected void updateLifeBar()

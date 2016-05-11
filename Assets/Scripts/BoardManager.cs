@@ -129,9 +129,14 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		}
 	public void clear()
 	{
-		Destroy (GameObject.Find ("Board"));
-		Destroy (GameObject.Find ("exit locked(Clone)"));
-		Destroy (GameObject.Find ("exit(Clone)"));
+		GameObject[] fl = GameObject.FindGameObjectsWithTag ("floor");
+		GameObject xt = GameObject.FindGameObjectWithTag ("Finish");
+		GameObject[] wl = GameObject.FindGameObjectsWithTag ("wall");
+		Destroy (xt);
+		foreach (GameObject tile in fl)
+			Destroy (tile);
+		foreach (GameObject wall in wl) 
+			Destroy(wall);
 	}
 		public void unLockExit()
 		{

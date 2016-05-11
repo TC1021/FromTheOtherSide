@@ -50,6 +50,16 @@ public class EnemyController : MovingObject {
 		life -= damage;
 		checkLife();
 	}
+	public bool tryToattack(int xDir,int yDir)
+	{
+		if (Mathf.Abs (xDir + yDir) <= 1) 
+		{
+			animator.SetTrigger("attack");
+			target.GetComponent<Player>().looseHealth(playerDamage);
+			return true;
+		}
+		return false;
+	}
 	public void MoveEnemy ()
 	{
 		if (Random.Range (0,skips) != 0) 
@@ -64,13 +74,10 @@ public class EnemyController : MovingObject {
 			xDir = (int)(Mathf.Round(target.transform.position.x)-transform.position.x);
 			yDir = (int)(Mathf.Round(target.transform.position.y)-transform.position.y);
 			Debug.Log (xDir + yDir);
-			if (Mathf.Abs (xDir + yDir) == 1) 
-			{
-				animator.SetTrigger("attack");
-				target.GetComponent<Player>().looseHealth(playerDamage);
-				return;
-			}
 
+			if (tryToattack(xDir,yDir)) //SI ATACA QUE SE REGRESE
+				return;
+			
 			bool first_x = Random.Range (0, 2) == 0; //MOVER PRIMERO EN ALEATORIO X,Y
 			if (first_x && xDir != 0)//SI ES DIFERENTE DE 0 Mover AQUI
 				xDir = xDir > 0 ? 1 : -1;
@@ -100,4 +107,5 @@ public class EnemyController : MovingObject {
 		}
 
 	}
+
 }

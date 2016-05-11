@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
 	private GameObject onBeat;
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-	private int level = 3;   
-	bool movement; //Current level number, expressed in game as "Day 1".
+	public int level = 3;
+    bool movement; //Current level number, expressed in game as "Day 1".
 		
 		//Awake is always called before any Start functions
 		void Awake()
@@ -42,8 +42,8 @@ public class GameManager : MonoBehaviour
 		}
 	void OnLevelWasLoaded(int index)
 	{
-		level++;
-		InitGame ();
+        level++;
+        InitGame ();
 	}
 		//Initializes the game for each level.
 		void InitGame()

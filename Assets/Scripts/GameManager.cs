@@ -43,9 +43,10 @@ public class GameManager : MonoBehaviour
 	void OnLevelWasLoaded(int index)
 	{
 		Debug.Log ("LEVEL LOADED");
-        level++;
         InitGame ();
 	}
+	public void nextLevel()
+	{++level;}
 		//Initializes the game for each level.
 		void InitGame()
 		{

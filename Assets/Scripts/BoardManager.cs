@@ -163,20 +163,21 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		int enemyCount = 1;//(int)Mathf.Log(level, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-        LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
-
-        //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 		if (level%3==0)  //PONDREMOS BOSS
 		{
 			switch (level / 3) 
 			{
 				case 1:
+					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
 					break;
 				case 2:
+					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
 					break;
 				case 3:
+					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
 					break;
 				default:
+					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
 					break;
 			}
 		}

@@ -14,7 +14,6 @@ public class EnemyController : MovingObject {
 	// Use this for initialization
 	void Start () 
 	{
-		Debug.Log ("Enemy");
 		GameManager.instance.AddEnemyToList (this);
 		animator = GetComponent<Animator> ();
 		target = GameObject.FindGameObjectWithTag ("Player");

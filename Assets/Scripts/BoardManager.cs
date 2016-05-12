@@ -175,7 +175,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 				LayoutONEObjectAtRandom(enemyBossTiles[2]); //DeathMetal
 				break;
 			case 3: //NecroDancer
-				LayoutObjectAtRandom (enemyBossTiles, 1, 1); 
+				LayoutONEObjectAtRandom(enemyBossTiles[3]);
 				break;
 			default:
 				LayoutObjectAtRandom (enemyBossTiles, 1, (level/3)-1);//Random

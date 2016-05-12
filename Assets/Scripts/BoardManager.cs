@@ -162,26 +162,27 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		int enemyCount = level;//(int)Mathf.Log(level, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-		if (level%3==0)  //PONDREMOS BOSS
-		{
-			switch (level / 3) 
-			{
-				case 1:
-					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
-					break;
-				case 2:
-					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
-					break;
-				case 3:
-					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
-					break;
-				default:
-					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
-					break;
+		if (level % 3 == 0) {  //PONDREMOS BOSS
+			switch (level / 3) {
+			case 1:
+				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+				break;
+			case 2:
+				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+				break;
+			case 3:
+				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+				break;
+			default:
+				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+				break;
 			}
+		} else 
+		{
+			LayoutObjectAtRandom(enemyTiles, enemyCount,enemyCount);
 		}
 			
-		LayoutObjectAtRandom(enemyTiles, enemyCount,enemyCount);
+
 
         //Instantiate the exit tile in the upper right hand corner of our game board
 		Instantiate (locked_exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);

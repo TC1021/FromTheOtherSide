@@ -128,6 +128,10 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 				Instantiate(tileChoice, randomPosition, Quaternion.identity);
 			}
 		}
+	void LayoutONEObjectAtRandom(GameObject obj)
+	{
+		Instantiate(obj,  RandomPosition(), Quaternion.identity);
+	}
 	public void clear()
 	{
 		GameObject[] fl = GameObject.FindGameObjectsWithTag ("floor");
@@ -165,10 +169,10 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		if (level % 3 == 0) {  //PONDREMOS BOSS
 			switch (level / 3) {
 			case 1:
-				LayoutObjectAtRandom (enemyBossTiles[0], 1, 1); //Dragon
+				LayoutONEObjectAtRandom (enemyBossTiles [1]);
 				break;
 			case 2:
-				LayoutObjectAtRandom (enemyBossTiles[1], 1, 1); //Dragon
+				LayoutONEObjectAtRandom(enemyBossTiles[1]); //Dragon
 				break;
 			case 3:
 				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Player : MovingObject
 	{
@@ -125,8 +126,9 @@ public class Player : MovingObject
 	private void gameOver()
 	{
 		//Destroy(gameObject);
-		enabled=false;
-		GameManager.instance.GameOver ();
+//		enabled=false;
+//		GameManager.instance.GameOver ();
+		SceneManager.LoadScene("Main");
 	}
 	public void looseHealth(int damage)
 	{

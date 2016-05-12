@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 		}
 	void OnLevelWasLoaded(int index)
 	{
+		onBeat = GameObject.Find ("beat_marker_green");
 		Debug.Log ("LEVEL LOADED");
         //InitGame ();
 	}
@@ -51,9 +52,7 @@ public class GameManager : MonoBehaviour
 		void InitGame()
 		{
 			GameManager.instance.resetBoard ();
-			onBeat = GameObject.Find ("beat_marker_green");
 			enemies.Clear ();
-			
 			boardScript.SetupScene(level);
 		}
 	public void resetBoard()

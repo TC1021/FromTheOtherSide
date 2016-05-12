@@ -168,17 +168,17 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 		if (level % 3 == 0) {  //PONDREMOS BOSS
 			switch (level / 3) {
-			case 1:
+			case 1://DRAGONS
 				LayoutObjectAtRandom(new GameObject[]{enemyBossTiles[0],enemyBossTiles[1]},1,1);
 				break;
 			case 2:
-				LayoutONEObjectAtRandom(enemyBossTiles[2]); //Dragon
+				LayoutONEObjectAtRandom(enemyBossTiles[2]); //DeathMetal
 				break;
-			case 3:
-				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+			case 3: //NecroDancer
+				LayoutObjectAtRandom (enemyBossTiles, 1, 1); 
 				break;
 			default:
-				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+				LayoutObjectAtRandom (enemyBossTiles, 1, (level/3)-1);//Random
 				break;
 			}
 		} else 

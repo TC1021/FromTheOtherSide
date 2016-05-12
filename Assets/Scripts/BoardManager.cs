@@ -156,7 +156,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 			//LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
 
-
+		Debug.Log (level);
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
 		//int enemyCount = level;
@@ -182,7 +182,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			}
 		}
 			
-		LayoutObjectAtRandom(enemyBossTiles, enemyCount,enemyCount);
+		LayoutObjectAtRandom(enemyTiles, enemyCount,enemyCount);
 
         //Instantiate the exit tile in the upper right hand corner of our game board
 		Instantiate (locked_exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);

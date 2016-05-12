@@ -165,10 +165,10 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		if (level % 3 == 0) {  //PONDREMOS BOSS
 			switch (level / 3) {
 			case 1:
-				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+				LayoutObjectAtRandom (enemyBossTiles[0], 1, 1); //Dragon
 				break;
 			case 2:
-				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon
+				LayoutObjectAtRandom (enemyBossTiles[1], 1, 1); //Dragon
 				break;
 			case 3:
 				LayoutObjectAtRandom (enemyBossTiles, 1, 1); //Dragon

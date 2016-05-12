@@ -50,31 +50,36 @@ public class Player : MovingObject
 
 		private void Update ()
 		{
-			int horizontal = 0;     //Used to store the horizontal move direction.
-			int vertical = 0;       //Used to store the vertical move direction.
-					
-			if (Input.GetKeyDown (KeyCode.RightArrow)) 
-			{horizontal = 1;} 
-			else if (Input.GetKeyDown (KeyCode.LeftArrow)) 
-			{horizontal = -1;} 
-			else if (Input.GetKeyDown (KeyCode.DownArrow)) 
-			{vertical = -1;} 
-			else if (Input.GetKeyDown (KeyCode.UpArrow)) 
-			{vertical = 1;}
-
-			vertical = horizontal!=0? 0 : vertical;
-			if(horizontal != 0 || vertical != 0)
+			if (onBeat.activeSelf && move) 
 			{
-				RaycastHit2D hit;
-				if (Move (horizontal, vertical, out hit))
-					return; 
-			
-				if (hit.transform.tag == "enemy")  //ATACAR
-				{
-					animator.SetTrigger ("solarisChop");	
-					hit.rigidbody.GetComponent<EnemyController> ().looseHealth(damage);
-				}
+					int horizontal = 0;     //Used to store the horizontal move direction.
+					int vertical = 0;       //Used to store the vertical move direction.
+							
+					if (Input.GetKeyDown (KeyCode.RightArrow)) 
+					{horizontal = 1;} 
+					else if (Input.GetKeyDown (KeyCode.LeftArrow)) 
+					{horizontal = -1;} 
+					else if (Input.GetKeyDown (KeyCode.DownArrow)) 
+					{vertical = -1;} 
+					else if (Input.GetKeyDown (KeyCode.UpArrow)) 
+					{vertical = 1;}
+
+					vertical = horizontal!=0? 0 : vertical;
+					if(horizontal != 0 || vertical != 0)
+					{
+						RaycastHit2D hit;
+						if (Move (horizontal, vertical, out hit))
+							return; 
+					
+						if (hit.transform.tag == "enemy")  //ATACAR
+						{
+							animator.SetTrigger ("solarisChop");	
+							hit.rigidbody.GetComponent<EnemyController> ().looseHealth(damage);
+						}
+					}
 			}
+		if (!onBeat.activeSelf)
+			move = true;
 		}
 
 

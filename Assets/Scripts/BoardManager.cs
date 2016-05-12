@@ -133,7 +133,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		Instantiate(obj,  RandomPosition(), Quaternion.identity);
 	}
 	public void clear()
-	{
+	{ //Resetear todo, destruir objetos del tablero
 		GameObject[] fl = GameObject.FindGameObjectsWithTag ("floor");
 		GameObject xt = GameObject.FindGameObjectWithTag ("Finish");
 		GameObject[] wl = GameObject.FindGameObjectsWithTag ("wall");
@@ -143,7 +143,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 		foreach (GameObject wall in wl) 
 			Destroy(wall);
 	}
-		public void unLockExit()
+		public void unLockExit() //Desbloquear la puerta
 		{
 			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
 		}
@@ -163,11 +163,24 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
 		//int enemyCount = level;
-		int enemyCount = level;//(int)Mathf.Log(level, 2f);
-
+		//int enemyCount = level;//(int)Mathf.Log(level, 2f);
+		int enemyCount = (int)(
+			Math.Round( -315.999999849686
+		    + 918.172366079229 * level
+			- 1103.05611057376*Math.Pow(level,2)
+			+ 745.969466130060 *Math.Pow(level,3)
+			- 320.713095087906 *Math.Pow(level,4)
+			+ 92.8055114225891 *Math.Pow(level,5)
+			- 18.4952430478842 *Math.Pow(level,6)
+			+ 2.53866567363226 *Math.Pow(level,7)
+			- 0.235069444362095 *Math.Pow(level,8)
+			+ 0.0139825837697763 *Math.Pow(level,9)
+			- 0.000481150793510153*Math.Pow(level,10)
+			+ 0.00000726511142983408*Math.Pow(level,11)));
+		//[1,2,1+B,3,3,2+B,4,6,3+B,6,7,5+B]
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-		if (level % 3 == 0) {  //PONDREMOS BOSS
-			switch (level / 3) {
+		if (level % 3 == 0) {  //PONDREMOS BOSS CADA 3 LVLS
+			switch (level / 3) { //Dragones,DeathMetal,NecroDancer y despDel 12 Randoms
 			case 1://DRAGONS
 				LayoutObjectAtRandom(new GameObject[]{enemyBossTiles[0],enemyBossTiles[1]},1,1);
 				break;
@@ -183,7 +196,7 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			}
 		} else 
 		{
-			LayoutObjectAtRandom(enemyTiles, enemyCount,enemyCount);
+			LayoutObjectAtRandom(enemyTiles, enemyCount,enemyCount); //Poner enemigos
 		}
 			
 

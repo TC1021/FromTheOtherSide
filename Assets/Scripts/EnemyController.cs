@@ -16,31 +16,31 @@ public class EnemyController : MovingObject {
 	{
 		GameManager.instance.AddEnemyToList (this);
 		animator = GetComponent<Animator> ();
-		target = GameObject.FindGameObjectWithTag ("Player");
-		shadow = false;
-		checkLife ();
-		animate ();
+		target = GameObject.FindGameObjectWithTag ("Player"); 
+		shadow = false; //Bandera usada para saber si lo ponemos negro o no
+		checkLife (); //Inicializar vida
+		animate ();  //Inicializar animacion
 		base.Start ();
 	}
 	protected void enemyDies()
 	{
 		Destroy(gameObject);
-		GameManager.instance.RemoveEnemyFromList(this);
+		GameManager.instance.RemoveEnemyFromList(this); //Cuando muere decirle al GameManager
 	}
-	protected void checkLife()
+	protected void checkLife() //Cambia el texto del corazon
 	{
 		life_Indicator.text = "" + life;
 		if (life == 0)
 		{ enemyDies(); }
 	}
-	protected void animate()
+	protected void animate() //Negro o a COlor
 	{
 		if (shadow) 
-			animator.SetTrigger("color");
+			animator.SetTrigger("color"); 
 		else 
 			animator.SetTrigger("shadow");
 	}
-	void Update () 
+	void Update () //Shadow tendra magnitud y saber si lo ponemos a color
 	{
 		shadow = (target.transform.position-transform.position).magnitude < 4; //Si es mas de 5 que se vean sombra y no persigan
 		animate ();
@@ -50,8 +50,8 @@ public class EnemyController : MovingObject {
 		life -= damage;
 		checkLife();
 	}
-	protected virtual bool tryToattack(int xDir,int yDir)
-	{
+	protected virtual bool tryToattack(int xDir,int yDir) //Si esta a 1 casilla atacara
+	{													//De otra forma regresa False
 		if (Mathf.Abs (xDir + yDir) == 1) 
 		{
 			target.GetComponent<Player>().looseHealth(playerDamage);
@@ -67,16 +67,15 @@ public class EnemyController : MovingObject {
 		int xDir = 0; int yDir = 0;
 		RaycastHit2D hit;
 
-		if (shadow) 
+		if (shadow) //PERSEGUIR
 		{ 
 			//SI shadow, perseguir, Dir es la resta de posiciones
 			xDir = (int)(Mathf.Round(target.transform.position.x)-transform.position.x);
 			yDir = (int)(Mathf.Round(target.transform.position.y)-transform.position.y);
-			//Debug.Log (xDir + yDir);
 
 			if (tryToattack(xDir,yDir)) //SI ATACA QUE SE REGRESE
 				return;
-			
+			//SI NO PUDO ATACAR SE MUEVE HACIA EL PLAYER
 			bool first_x = Random.Range (0, 2) == 0; //MOVER PRIMERO EN ALEATORIO X,Y
 			if (first_x && xDir != 0)//SI ES DIFERENTE DE 0 Mover AQUI
 				xDir = xDir > 0 ? 1 : -1;

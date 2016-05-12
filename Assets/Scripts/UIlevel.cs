@@ -15,6 +15,6 @@ public class UIlevel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {;
-        levelText.text = "Level " + levelUI;
+        levelText.text = "Level " + levelUI; //UpdateLevel
 	}
 }

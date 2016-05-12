@@ -14,14 +14,15 @@ public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
 
     void Start()
     {
+		//Inicializar indicadores del beat
 		iDefault= GameObject.Find("beat_marker_red");
 		iOnBeat= GameObject.Find("beat_marker_green");  iOnBeat.SetActive (false);
-		//SET AUDIOCALLBACK
+		//SET AUDIOCALLBACK, En ese objeto caera el beat
         AudioProcessor processor = FindObjectOfType<AudioProcessor>();
         processor.addAudioCallback(this);
     }
 
-	IEnumerator activateBeatIndicator()
+	IEnumerator activateBeatIndicator() //Prender foco verde, esperar x segundos, apagar
 	{
 		activate (iOnBeat);
 		deactivate (iDefault);
@@ -29,7 +30,7 @@ public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
 		deactivate (iOnBeat);
 		activate (iDefault);
 	}
-	public void onOnbeatDetected()
+	public void onOnbeatDetected() //ON BEAT, aqui ejecutamos lo que pasara cada beat
     {
 		Debug.Log("BEAT");
 		StartCoroutine(activateBeatIndicator());

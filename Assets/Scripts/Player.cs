@@ -14,8 +14,8 @@ public class Player : MovingObject
 
 		private Animator animator;                  //Used to store a reference to the Player's animator component.
 
-		private GameObject onBeat;
-		private GameObject[] hearts_array;
+		private GameObject onBeat; //Indicador de movimiento
+		private GameObject[] hearts_array; //ARREGLO DE CORAZONES
 		private bool move; //To restrict movement to OncePerBeat,some beats will maintain green icon 0.2s but you should not be able to move until next beat
 		public int life_in_half_hearts = 10; //Life 10 means 10 halves -> 5 Full hearts 
 		private Sprite half_heart_icon,no_heart_icon,full_heart_icon ;
@@ -38,7 +38,8 @@ public class Player : MovingObject
 											GameObject.Find ("heart3"),
 											GameObject.Find ("heart4"),
 											GameObject.Find ("heart5")};
-			//ICONS
+			//Declarar corazones que se usaran en un Array
+			//ICONS para poner en corazones
 			no_heart_icon = Resources.Load<Sprite> ("GUI/heart_empty");
 			full_heart_icon=Resources.Load<Sprite> ("GUI/heart");
 			half_heart_icon = Resources.Load<Sprite> ("GUI/heart_half");
@@ -66,7 +67,7 @@ public class Player : MovingObject
 			{
 					int horizontal = 0;     //Used to store the horizontal move direction.
 					int vertical = 0;       //Used to store the vertical move direction.
-							
+					//Diferentes direcciones
 					if (Input.GetKeyDown (KeyCode.RightArrow)) 
 					{horizontal = 1;} 
 					else if (Input.GetKeyDown (KeyCode.LeftArrow)) 
@@ -75,14 +76,14 @@ public class Player : MovingObject
 					{vertical = -1;} 
 					else if (Input.GetKeyDown (KeyCode.UpArrow)) 
 					{vertical = 1;}
-
+					//Evitar movimiento diagonal volviendo 0
 					vertical = horizontal!=0? 0 : vertical;
 					if(horizontal != 0 || vertical != 0)
 					{
 						RaycastHit2D hit;
 						if (Move (horizontal, vertical, out hit))
 							return; 
-					
+						//SI LLEGA AQUI ES QUE NO SE PUDO MOVER
 						if (hit.transform.tag == "enemy")  //ATACAR
 						{
 							animator.SetTrigger ("solarisChop");	
@@ -91,7 +92,7 @@ public class Player : MovingObject
 					}
 			}
 
-		if (!onBeat.activeSelf)
+		if (!onBeat.activeSelf) //Con esto evitamos +1 movimiento por beat
 			move = true;
 		}
 
@@ -148,7 +149,7 @@ public class Player : MovingObject
 //		GameManager.instance.GameOver ();
 		SceneManager.LoadScene("Main");
 	}
-	public void looseHealth(int damage)
+	public void looseHealth(int damage) //Metodo que invocan los enemigos
 	{
 		animator.SetTrigger ("solarisHit");
 		life_in_half_hearts -= damage;

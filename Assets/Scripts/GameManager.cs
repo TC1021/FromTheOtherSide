@@ -43,10 +43,7 @@ public class GameManager : MonoBehaviour
 		}
 	void OnLevelWasLoaded(int index)
 	{
-		onBeat = GameObject.Find ("beat_marker_green");
-		Debug.Log ("LEVEL LOADED");
-		Debug.Log (loads);
-		Debug.Log (level);
+		onBeat = GameObject.Find ("beat_marker_green");//Recuperar inidcador
         InitGame ();
 	}
 	public void nextLevel()
@@ -54,13 +51,13 @@ public class GameManager : MonoBehaviour
 		//Initializes the game for each level.
 		void InitGame()
 		{
-			GameManager.instance.resetBoard ();
-			enemies.Clear ();
-			boardScript.SetupScene(level);
+			GameManager.instance.resetBoard ();//BorrarBoardSiExiste
+			enemies.Clear ();	
+			boardScript.SetupScene(level); //Poner Nuevo Board
 		}
 	public void resetBoard()
 	{boardScript.clear ();}
-	IEnumerator MoveEnemies()
+	IEnumerator MoveEnemies() //Enviar indicacion de moverse a todos los enemigos, se invoca en beat
 	{	
 		yield return new WaitForSeconds (turnDelay);
 		for (int i = 0; i < enemies.Count; ++i) 
@@ -74,8 +71,8 @@ public class GameManager : MonoBehaviour
 	public void RemoveEnemyFromList(EnemyController e)
 	{ 
 		enemies.Remove (e);
-		if (enemies.Count == 0)
-			boardScript.unLockExit ();
+		if (enemies.Count == 0) //Si elimina un enemigo y la cuenta se vuelve 0
+			boardScript.unLockExit (); //Desbloquear la puerta
 	}
 	void Update()
 	{
@@ -88,5 +85,5 @@ public class GameManager : MonoBehaviour
 		if (!onBeat.activeSelf)
 			movement = true; //Bandera para que no se muevan mas de 1 vez por beat
 	}
-	public void GameOver(){enabled=false;}
+	public void GameOver(){enabled=false;} //Al morir desactivar manejador de juego
 }

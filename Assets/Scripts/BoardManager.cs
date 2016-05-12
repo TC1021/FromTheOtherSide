@@ -156,11 +156,10 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 			//LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
 
-		Debug.Log (level);
 
         //Determine number of enemies based on current level number, based on a logarithmic progression
 		//int enemyCount = level;
-		int enemyCount = 1;//(int)Mathf.Log(level, 2f);
+		int enemyCount = level;//(int)Mathf.Log(level, 2f);
 
         //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 		if (level%3==0)  //PONDREMOS BOSS

@@ -38,19 +38,20 @@ public class GameManager : MonoBehaviour
 			movement = true;
 			boardScript = GetComponent<BoardManager>();
 			//Call the InitGame function to initialize the first level 
-			InitGame();
+			//InitGame();
 		}
 	void OnLevelWasLoaded(int index)
 	{
 		onBeat = GameObject.Find ("beat_marker_green");
 		Debug.Log ("LEVEL LOADED");
-        //InitGame ();
+        InitGame ();
 	}
 	public void nextLevel()
-	{++level;}
+	{++this.level;}
 		//Initializes the game for each level.
 		void InitGame()
 		{
+			Debug.Log (level);
 			GameManager.instance.resetBoard ();
 			enemies.Clear ();
 			boardScript.SetupScene(level);

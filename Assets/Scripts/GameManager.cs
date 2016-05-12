@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
 	public int level = 1;
+    public int highestLevel;
     bool movement; //Current level number, expressed in game as "Day 1".
 	public int loads = 0;
 		//Awake is always called before any Start functions
@@ -86,7 +87,6 @@ public class GameManager : MonoBehaviour
 
 		if (!onBeat.activeSelf)
 			movement = true; //Bandera para que no se muevan mas de 1 vez por beat
-			
 	}
 	public void GameOver(){enabled=false;}
 }

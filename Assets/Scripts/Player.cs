@@ -4,7 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class Player : MovingObject
 	{
-		protected float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
+    public static int highestLevelCamera;
+    GameObject gamemanager;
+    GameManager gameManagerScript;
+
+    protected float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
 		public int damage = 1;                  //How much damage a player does to a wall when chopping it.
 
 
@@ -19,7 +23,11 @@ public class Player : MovingObject
 		//Start overrides the Start function of MovingObject
 		protected override void Start ()
 		{
-			onBeat = GameObject.Find ("beat_marker_green");
+        highestLevelCamera = 0;
+        gamemanager = GameObject.Find("GameManager");
+        gameManagerScript = gamemanager.GetComponent<GameManager>();
+
+        onBeat = GameObject.Find ("beat_marker_green");
 			animator = GetComponent<Animator>();
 
 			life_in_half_hearts = GameManager.instance.life_in_half_hearts;
@@ -38,6 +46,7 @@ public class Player : MovingObject
 			updateLifeBar();
 
 			base.Start ();
+
 		}
 
 
@@ -50,7 +59,10 @@ public class Player : MovingObject
 
 		private void Update ()
 		{
-			if (onBeat.activeSelf && move) 
+        if (gameManagerScript.level > highestLevelCamera)
+            highestLevelCamera = gameManagerScript.level;
+
+        if (onBeat.activeSelf && move) 
 			{
 					int horizontal = 0;     //Used to store the horizontal move direction.
 					int vertical = 0;       //Used to store the vertical move direction.
@@ -78,6 +90,7 @@ public class Player : MovingObject
 						}
 					}
 			}
+
 		if (!onBeat.activeSelf)
 			move = true;
 		}

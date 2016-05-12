@@ -168,21 +168,21 @@ using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine r
 			switch (level / 3) 
 			{
 				case 1:
-					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
+					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
 					break;
 				case 2:
-					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
+					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
 					break;
 				case 3:
-					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
+					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
 					break;
 				default:
-					LayoutObjectAtRandom (enemyTiles,1,1); //Dragon
+					LayoutObjectAtRandom (enemyBossTiles,1,1); //Dragon
 					break;
 			}
 		}
 			
-			LayoutObjectAtRandom(enemyBossTiles, 1, 1);
+		LayoutObjectAtRandom(enemyBossTiles, enemyCount,enemyCount);
 
         //Instantiate the exit tile in the upper right hand corner of our game board
 		Instantiate (locked_exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);

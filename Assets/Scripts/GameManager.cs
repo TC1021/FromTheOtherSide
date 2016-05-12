@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 	private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
 	public int level = 1;
     bool movement; //Current level number, expressed in game as "Day 1".
-		
+	public int loads = 0;
 		//Awake is always called before any Start functions
 		void Awake()
 		{
@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
 	{
 		onBeat = GameObject.Find ("beat_marker_green");
 		Debug.Log ("LEVEL LOADED");
+		Debug.Log (loads);
+		Debug.Log (level);
         InitGame ();
 	}
 	public void nextLevel()
@@ -51,7 +53,6 @@ public class GameManager : MonoBehaviour
 		//Initializes the game for each level.
 		void InitGame()
 		{
-			Debug.Log (level);
 			GameManager.instance.resetBoard ();
 			enemies.Clear ();
 			boardScript.SetupScene(level);

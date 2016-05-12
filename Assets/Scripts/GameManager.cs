@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 	void OnLevelWasLoaded(int index)
 	{
 		Debug.Log ("LEVEL LOADED");
-        InitGame ();
+        //InitGame ();
 	}
 	public void nextLevel()
 	{++level;}

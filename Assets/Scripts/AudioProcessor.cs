@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 public class AudioProcessor : MonoBehaviour
 {
-	private AudioSource source;
+	public AudioSource source;
 	
 	private long lastT, nowT, diff, entries, sum;
 	
@@ -95,7 +95,7 @@ public class AudioProcessor : MonoBehaviour
 		auco = new Autoco(maxlag, decay, framePeriod, getBandWidth());
 		
 		lastT = getCurrentTimeMillis();
-		source = GetComponent<AudioSource>();
+		//source = GetComponent<AudioSource>();
 	}
 	
 	public void tapTempo()

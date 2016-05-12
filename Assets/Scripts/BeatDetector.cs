@@ -10,7 +10,7 @@ using System.Collections;
 public class BeatDetector : MonoBehaviour, AudioProcessor.AudioCallbacks
 {
 	protected GameObject iOnBeat, iDefault,iError;
-	public float waitBeat=0.38f;
+	public float waitBeat=0.50f;
 
     void Start()
     {

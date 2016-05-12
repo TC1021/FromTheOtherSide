@@ -13,7 +13,7 @@ public class dragonController : EnemyController
 		animate ();
 		base.Start ();
 	}
-	protected bool tryToattack(int xDir,int yDir)
+	protected override bool tryToattack(int xDir,int yDir)
 	{ 
 		float k = (target.transform.position - transform.position).magnitude;
 		Debug.Log (k);

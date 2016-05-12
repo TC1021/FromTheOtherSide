@@ -52,9 +52,8 @@ public class EnemyController : MovingObject {
 	}
 	protected virtual bool tryToattack(int xDir,int yDir)
 	{
-		if (Mathf.Abs (xDir + yDir) <= 1) 
+		if (Mathf.Abs (xDir + yDir) == 1) 
 		{
-			//animator.SetTrigger("attack");
 			target.GetComponent<Player>().looseHealth(playerDamage);
 			return true;
 		}
